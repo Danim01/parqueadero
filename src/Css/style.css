@@ -1,0 +1,146 @@
+body{
+    background-color: #caf0f8;
+    display: grid;
+    place-content: center;
+    min-height: 100vh;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    padding: 3rem;
+    justify-content: center;
+}
+
+.contenido {
+    display: flex;
+    gap: 2rem;
+}
+
+h1{
+    font-size: 30px;
+    width: 100%;
+    text-align: center;
+    color: #03045e;
+    margin-bottom: 25px;
+    line-height: 1;
+}
+
+.formulario{
+    max-width: 600px;
+    background-color: white;
+    padding: 8px;
+    border: 2px solid #03045e;
+    border-radius: 16px;
+    position: relative;
+}
+
+fieldset {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 600px;
+    gap: 16px;
+    margin: 1.5rem 0;
+    border: none;
+
+}
+
+.contenedorServicios{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.label{
+    display: flex;
+    width: 100%;
+}
+
+.label span{
+    font-size: 16px;
+    width: 140px;
+
+}
+
+.label input, .label select{
+    flex-grow: 1;
+}
+
+button{
+    background-color: #00b4d8;
+    border: #ffffff;
+    padding: 2px 14px;
+    color: #ffffff;
+    border-radius: 555555px;
+    box-shadow: 4px 4px 8px #0000003e ;
+    display: flex;
+    transition: all 200ms ease-in;
+}
+
+button:hover{
+    background-color: #0298b6;
+}
+
+button:active{
+    background-color: #007890;
+    transform: scale(0.9);
+}
+
+img{
+    margin: 0 8px;
+}
+
+.visually-hidden {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+.servicio{
+    background-color: #00b4d8;
+    border-radius: 555555px;
+    box-shadow: 4px 4px 8px #0000003e ;
+    padding: 2px 20px;
+    margin: 0 15px;
+    color: #ffffff;
+    display: flex;
+    transition: background-color 200ms ease-in;
+}
+
+.servicio:has(input[type="radio"]:checked){
+    background-color: #007890;
+}
+
+.servicio:hover{
+    background-color: #0298b6;
+}
+
+.ingresar{
+    margin: 20px auto;
+}
+
+.tabla_registro {
+    border-collapse: collapse;
+}
+
+.tabla_registro td,
+.tabla_registro th {
+    border: 1px solid black;
+    padding: 4px 16px;
+    text-transform: capitalize;
+    line-height: 1;
+}
+
+.tabla_registro th {
+    background-color: #90e0ef;
+    font-size: 0.875rem;
+}
+
+.tabla_registro td {
+    font-size: 0.875rem;
+}
+
+.tabla_registro .tabla_email {
+    text-transform: lowercase;
+}

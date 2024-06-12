@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./src/Css/style.css" />
+    <link rel="stylesheet" href="./src/Css/reset.css" />
+    <title>Registro vehículo</title>
+  </head>
+  <body>
+    <header>
+      <h1>Registro de vehículos</h1>
+    </header>
+    <div class="contenido">
+      <main>
+        <form id="form" class="formulario">
+          <fieldset>
+            <legend>Agregar vehículo</legend>
+            <label class="label">
+              <span> Placa </span>
+              <input id="Placa" type="text" name="placa" />
+              <div id="placaError" class="error"></div>
+            </label>
+            <button type="button">
+              <img src="/lupa.svg" alt="Lupa" width="24" />
+              <span> Buscar </span>
+            </button>
+            <label class="label">
+              <span> Tipo de vehículo </span>
+              <select name="tipoDeVehiculo" id="TipoDeVehiculo">
+                <option value="" selected>Tipo de vehículo</option>
+                <option value="moto">Moto</option>
+                <option value="carro">Carro</option>
+              </select>
+            </label>
+            <label class="label">
+              <span> Color </span>
+              <select name="color" id="Color">
+                <option value="" selected>Color de vehiculo</option>
+                <option value="Blanco">Blanco</option>
+                <option value="Gris">Gris</option>
+                <option value="Negro">Negro</option>
+                <option value=" Azul">Azul</option>
+                <option value="Rojo">Rojo</option>
+                <option value="Plata">Plata</option>
+                <option value=" Verde">Verde</option>
+                <option value="Marron">Marron</option>
+                <option value="Amarillo">Amarillo</option>
+                <option value="Rosado">Rosado</option>
+                <option value="otro">Otro</option>
+              </select>
+            </label>
+            <label class="label">
+              <span> Marca </span>
+              <select name="marca" id="MarcaCarro"></select>
+            </label>
+            <label class="label">
+              <span> Modelo </span>
+              <!-- El step 1 hace que cuando en el input le de en las flechas se mueva 1 año por click -->
+              <input
+                id="Modelo"
+                type="number"
+                name="modelo"
+                min="1900"
+                max="2099"
+                step="1"
+                value="2010"
+              />
+            </label>
+            <div class="contenedorServicios">
+              <label class="servicio">
+                <img src="/reloj.svg" alt="reloj" />
+                Hora
+                <input
+                  name="servicio"
+                  type="radio"
+                  value="hora"
+                  class="visually-hidden"
+                />
+              </label>
+              <label class="servicio">
+                <img src="/sun.svg" alt="sun" />
+                Día
+                <input
+                  name="servicio"
+                  type="radio"
+                  value="dia"
+                  class="visually-hidden"
+                />
+              </label>
+              <label class="servicio">
+                <img src="/calendario.svg" alt="calendario" />
+                Mes
+                <input
+                  name="servicio"
+                  type="radio"
+                  value="mes"
+                  class="visually-hidden"
+                />
+              </label>
+            </div>
+          </fieldset>
+          <button id="IngresarVehiculo" type="submit" class="ingresar">
+            <img src="/car.svg" alt="carro" width="24" />
+            Ingresar
+          </button>
+        </form>
+      </main>
+      <section class="tabla_section">
+        <table class="tabla_registro">
+          <thead>
+            <tr>
+              <th colspan="5">Vehículo</th>
+              <th colspan="4">Usuario</th>
+            </tr>
+            <tr>
+              <th>Placa</th>
+              <th>Tipo Vehículo</th>
+              <th>Color</th>
+              <th>Marca</th>
+              <th>Modelo</th>
+              <th>Nombre</th>
+              <th>ID</th>
+              <th>Celular</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </section>
+    </div>
+    <!-- Como se esta importando módulos para que estos funcionen 
+            se pone type="module" y así él reconoce que en este proyecto se van 
+            a utilizar módulos lo que hace que se habiliten los import y los export  -->
+    <script src="./src/JavaScript/main.js" type="module"></script>
+  </body>
+</html>
