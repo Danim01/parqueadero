@@ -1,18 +1,22 @@
-import { Vehiculo, Usuario } from "../models/modelo";
+import Vehiculo from "../models/vehiculoModelo";
+import Usuario from "../models/usuarioModelo";
+import VistaVehiculo from "../views/viewVehiculo";
+import VistaUsuario from "../views/viewsUsuario";
+import ControladorVehiculo from "../controllers/controllerVehiculo";
+import ControladorUsuario from "../controllers/controllersUsuario";
+
 // Esta va a ser la clase principal que me ayuda 
-// a ejecutar todo el codigo
+// a ejecutar todo el código
 class Main{
     constructor() {
-        this.mensaje = "hola mundo";
-    }
-
-    imprimir (){
-        console.log(this.mensaje);
+        this.vistaVehiculo = new VistaVehiculo();
+        this.vistaUsuario = new VistaUsuario();
+        this.controladorVehiculo = new ControladorVehiculo();
+        this.controladorUsuario = new ControladorUsuario();
     }
 
 }
 
-const main = new Main();
+new Main();
 
-main.imprimir();
 

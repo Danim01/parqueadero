@@ -4,34 +4,6 @@ import { marcasCarros, marcasMotos } from "./constantes.js";
 // Esto es un evento que me sirve para detectar cuando el html carga
 // completamente y ejecuta la funcion asociada al eventListener
 document.addEventListener('DOMContentLoaded', () => {
-  // Model
-  // Es una representación de los datos guardados
-  class Vehiculo{
-    constructor(placa, tipoDeVehiculo, color, marca, modelo, servicio){
-      this.placa = placa;
-      this.tipoDeVehiculo = tipoDeVehiculo;
-      this.color = color;
-      this.marca = marca;
-      this.modelo = modelo;
-      this.servicio = servicio;
-    }
-
-    // Esto me vincula un usuario con un vehiculo
-    agregarUsuario(usuario){
-      // Con el this lo que hago es decir que voy a crear una instancia 
-      // del usuario en el vehiculo 
-      this.usuario = usuario;
-    }
-  }
-
-  class Usuario {
-    constructor(nombre, identificacion, celular, email){
-      this.nombre = nombre;
-      this.identificacion = identificacion;
-      this.celular = celular;
-      this.email = email;
-    }
-  }
 
   // View
   class VistaVehiculo{
@@ -41,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
       this.botonesServicios = this.formulario.querySelectorAll('label.servicio input');
       this.selectTipoVehiculo = this.formulario.querySelector('#TipoDeVehiculo');
       this.select = document.getElementById("MarcaCarro");
-
     }
 
     mostrarMarcas(marcas){
@@ -191,7 +162,6 @@ document.addEventListener('DOMContentLoaded', () => {
         servicio,
         id,
         nombre, 
-        identificacion,
         celular,
         email
       } = datos;
@@ -218,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Esta condición crea una instancia del usuario en cada vehiculo
       if (servicio !== "hora"){
         // Aquí se crea la instancia del usuario
-        const usuario = new Usuario(id, nombre, identificacion, celular, email);
+        const usuario = new Usuario(id, nombre, celular, email);
         vehiculo.agregarUsuario(usuario);
       }
 
