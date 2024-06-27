@@ -1,15 +1,14 @@
-import VistaVehiculo from "../views/viewVehiculo";
 import { marcasCarros, marcasMotos } from "../JavaScript/constantes";
 import { validarPlaca, verificarEspaciosVacios } from "../JavaScript/utilidades";
 import Vehiculo from "../models/vehiculoModelo";
 
 // Controller
 class ControladorVehiculo {
-    constructor () {
+    constructor (formulario) {
       this.vehiculos = [];
       this.vistaVehiculo = new VistaVehiculo ();
       this.vistaVehiculo.selectTipoVehiculo.addEventListener('change', this.ponerMarcas.bind(this));
-      this.vistaVehiculo.formulario.addEventListener('submit', this.agregarVehiculo.bind(this));
+      formulario.addEventListener('submit', this.agregarVehiculo.bind(this));
     }
 
     ponerMarcas(evento){

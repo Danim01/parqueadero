@@ -4,8 +4,8 @@ body{
     place-content: center;
     min-height: 100vh;
     font-family: Georgia, 'Times New Roman', Times, serif;
-    padding: 3rem;
     justify-content: center;
+    width: 100%;
 }
 
 .contenido {

@@ -1,20 +1,8 @@
 /* El import sirve para traer la información de otro archivo
-    le tengo que escribir import y si estoy exportando un objeto
-    entre {} escribo las variables que voy a utilizar y luego de ello escribir 
-    from y entre "" la ruta del archivo que tiene la información que quiero exportar */
-import { regexpPlacaCarro, regexpPlacaMoto } from "./constantes.js"
-
-function validarPlaca(placa, tipoDeVehiculo){
-  let esPlacaValida = true;
-
-  if (tipoDeVehiculo === "carro"){
-    esPlacaValida = regexpPlacaCarro.test(placa);
-  } else if (tipoDeVehiculo === "moto"){
-    esPlacaValida = regexpPlacaMoto.test(placa) || regexpPlacaCarro.test(placa);
-  }
-
-  return esPlacaValida;
-}
+  le tengo que escribir import y si estoy exportando un objeto
+  entre {} escribo las variables que voy a utilizar y luego de ello escribir 
+  from y entre "" la ruta del archivo que tiene la información que quiero exportar */
+/* import { regexpPlacaCarro, regexpPlacaMoto } from "./constantes.js" */
 
 function verificarEspaciosVacios(datos){
   let inputVacio = false;
@@ -43,9 +31,8 @@ function verificarEspaciosVacios(datos){
 
 
 /* El export sirve para exportar la información que yo quiera utilizar en otros archivos
-    si son varias variables las que quiero exportar las guardo en un objeto, pero si solo 
-    es una se exporta así: export default y el nombre de la variable */
+  si son varias variables las que quiero exportar las guardo en un objeto, pero si solo 
+  es una se exporta así: export default y el nombre de la variable */
 export {
-    validarPlaca,
     verificarEspaciosVacios
 }
