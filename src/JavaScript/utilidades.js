@@ -27,12 +27,15 @@ function verificarEspaciosVacios(datos){
   return inputVacio;
 }
 
-
-
+// función para convertir las fechas a algo que entienda mysql
+function dateTimeForMysql(date) {
+  return date.toISOString().slice(0, 19).replace('T', ' ');
+}
 
 /* El export sirve para exportar la información que yo quiera utilizar en otros archivos
   si son varias variables las que quiero exportar las guardo en un objeto, pero si solo 
   es una se exporta así: export default y el nombre de la variable */
 export {
-    verificarEspaciosVacios
+    verificarEspaciosVacios,
+    dateTimeForMysql
 }

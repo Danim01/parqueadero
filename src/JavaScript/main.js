@@ -1,20 +1,22 @@
 import ControladorVehiculo from "../controllers/controladorVehiculo";
 import ControladorUsuario from "../controllers/controladorUsuario";
+import ControladorConstantes from "../controllers/controladorConstantes";
 import Vista from "../views/vista";
 import { verificarEspaciosVacios } from "./utilidades";
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
 // Esta va a ser la clase principal que me ayuda
 // a ejecutar todo el código
 class Main{
   constructor() {
     this.controladorVehiculo = new ControladorVehiculo();
     this.controladorUsuario = new ControladorUsuario();
-    this.vista = new Vista();
+    this.constantes = new ControladorConstantes()
+    this.vista = new Vista(this.constantes);
     this.manejarSubmit = this.manejarSubmit.bind(this);
   }
 
-  manejarSubmit(evento) {
+  async manejarSubmit(evento) {
     evento.preventDefault();
     // El evento.target hace referencia al elemento html que se le asocio
     // al evento, en este caso cuando la persona le da en ingresar
@@ -59,51 +61,58 @@ class Main{
     // nombre de la nueva key y pasandole el valor de esa key
     datos.horaIngreso = horaIngreso;
 
-    const nuevoVehiculo = this.controladorVehiculo.agregarVehiculo({
-      color,
-      marca,
-      modelo,
-      placa,
-      servicio,
-      tipoDeVehiculo
-    })
+    let usuarioId = null;
 
     if (servicio !== 'hora') {
       const esEmailValido = this.controladorUsuario.validarEmail(email)
       if (!esEmailValido) return
 
-      this.controladorUsuario.agregarUsuario({
+      const nuevoUsuario = await this.controladorUsuario.agregarUsuario({
         celular,
         email,
         identificacion,
         nombre,
-        vehiculoId: nuevoVehiculo.id
       })
+
+      usuarioId = nuevoUsuario.id
     }
+
+    const nuevoVehiculo = await this.controladorVehiculo.agregarVehiculo({
+      color,
+      marca,
+      modelo,
+      placa,
+      servicio,
+      tipoDeVehiculo,
+      usuarioId,
+      horaIngreso: datos.horaIngreso
+    })
 
     const vehiculos = this.controladorVehiculo.vehiculos
     const usuarios = this.controladorUsuario.usuarios
-
-    console.log({
-      vehiculos,
-      usuarios
-    })
 
     // Aquí se llama a la función que esta en la vista
     // para que muestre la información en una tabla
     this.vista.mostrarInformacionTabla(vehiculos, usuarios)
 
-/*     this.vista.formulario.reset(); */
+    this.vista.formulario.reset();
   }
 
-  iniciarPrograma() {
+  async iniciarPrograma() {
     this.vista.inicializarEventoSubmit(this.manejarSubmit);
+
+    await this.controladorVehiculo.obtenerTodosVehiculos();
+    await this.controladorUsuario.obtenerTodosUsuarios();
+
+    const vehiculos = this.controladorVehiculo.vehiculos
+    const usuarios = this.controladorUsuario.usuarios
+    this.vista.mostrarInformacionTabla(vehiculos, usuarios)
   }
 }
 
 const main = new Main();
-// llamamos al Metodo iniciarPrograma del m
-main.iniciarPrograma();
+// llamamos al Metodo iniciarPrograma del main
+await main.iniciarPrograma();
 })
 
 

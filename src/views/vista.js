@@ -2,21 +2,28 @@ import { marcasCarros, marcasMotos } from "../JavaScript/constantes";
 
 // View
 class Vista{
-    constructor() {
+    constructor(constantes) {
         this.formulario = document.getElementById("form");
         this.tbody = document.getElementById("tbody");
         this.botonesServicios = this.formulario.querySelectorAll('label.servicio input');
         this.selectTipoVehiculo = this.formulario.querySelector('#TipoDeVehiculo');
-        this.select = document.getElementById("MarcaCarro");
+        this.selectMarcas = document.getElementById("MarcaCarro");
+        this.selectColores = document.getElementById("Color");
+        this.constantes = constantes;
 
         this.selectTipoVehiculo.addEventListener('change', this.ponerMarcas.bind(this));
         this.botonesServicios.forEach(boton => {
             boton.addEventListener('change', this.manejarServicios.bind(this));
         })
+
+        this.mostrarColores();
     }
 
     // Mostrar marcas
-    ponerMarcas(evento){
+    async ponerMarcas(evento){
+        const marcasCarros = await this.constantes.obtenerMarcas("carro")
+        const marcasMotos = await this.constantes.obtenerMarcas("moto")
+
         const valorSelect = evento.target.value;
         if (valorSelect === "carro"){
             this.mostrarMarcas(marcasCarros);
@@ -25,17 +32,32 @@ class Vista{
         }
     }
 
+    async mostrarColores() {
+        const colores = await this.constantes.obtenerColores();
+
+        this.selectColores.innerHTML = 'option value="" selected>Color de vehiculo</option>';
+
+        // Marcas Carros
+        colores.forEach(color => {
+            const option = document.createElement("option");
+            // Se le esta diciendo al option que va a tener un atributo de tipo value
+            option.setAttribute("value", color.id);
+            option.textContent = color.nombre;
+            this.selectColores.appendChild(option);
+        })
+    }
+
     mostrarMarcas(marcas){
         // Esto sirve para mantener la opción de seleccione marca y no se reinicie
-        this.select.innerHTML = '<option value="" selected>Seleccione marca</option>';
+        this.selectMarcas.innerHTML = '<option value="" selected>Seleccione marca</option>';
 
         // Marcas Carros
         marcas.forEach(marca => {
-        const option = document.createElement("option");
-        // Se le esta diciendo al option que va a tener un atributo de tipo value
-        option.setAttribute("value", marca);
-        option.textContent = marca;
-        this.select.appendChild(option);
+            const option = document.createElement("option");
+            // Se le esta diciendo al option que va a tener un atributo de tipo value
+            option.setAttribute("value", marca.id);
+            option.textContent = marca.nombre;
+            this.selectMarcas.appendChild(option);
         })
     }
 
@@ -66,7 +88,7 @@ class Vista{
             <input type="text" name="nombre" id="nombre" />
         </label>
         <label class="label">
-            <span>Identificación</span> 
+            <span>Identificación</span>
             <input type="text" name="identificacion" id="identificacion" />
         </label>
         <label class="label">
@@ -100,7 +122,7 @@ class Vista{
         const fieldsetExistente = document.getElementById("fieldsetUsuario");
 
         if (fieldsetExistente){
-        fieldsetExistente.remove();
+            fieldsetExistente.remove();
         }
     }
 
@@ -108,7 +130,8 @@ class Vista{
     mostrarInformacionTabla(vehiculos, usuarios) {
         this.tbody.innerHTML = "";
         vehiculos.forEach(vehiculo => {
-            const usuario = usuarios.find((usuario) => usuario.vehiculoId === vehiculo.id);
+            const usuario = usuarios.find((usuario) => usuario.id === vehiculo.usuario_id);
+            console.log({vehiculo, usuario})
 
             const tr = document.createElement("tr");
 
@@ -116,9 +139,9 @@ class Vista{
             // si en el array no hay un usuario y el || "" sirve para que si no existe el usuario me ponga ese espacio vació
             tr.innerHTML = `
                 <td>${vehiculo.placa}</td>
-                <td>${vehiculo.tipoDeVehiculo}</td>
-                <td>${vehiculo.color}</td>
-                <td>${vehiculo.marca}</td>
+                <td>${vehiculo.tipo_vehiculo}</td>
+                <td>${vehiculo.color_nombre}</td>
+                <td>${vehiculo.marca_nombre}</td>
                 <td>${vehiculo.modelo}</td>
                 <td>${usuario?.nombre || "---"}</td>
                 <td>${usuario?.identificacion || "---"}</td>

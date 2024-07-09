@@ -5,14 +5,14 @@ import Usuario from "./usuarioModelo";
 // Es una representación de los datos guardados
 class Vehiculo {
     // Model
-    constructor(placa, tipoDeVehiculo, color, marca, modelo, servicio){
-        this.id = crypto.randomUUID();
+    constructor(placa, tipoDeVehiculo, colorId, marcaId, modelo, servicio, usuarioId){
         this.placa = placa;
         this.tipoDeVehiculo = tipoDeVehiculo;
-        this.color = color;
-        this.marca = marca;
+        this.colorId = colorId;
+        this.marcaId = marcaId;
         this.modelo = modelo;
         this.servicio = servicio;
+        this.usuarioId = usuarioId;
     }
 }
 
